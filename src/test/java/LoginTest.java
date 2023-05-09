@@ -7,18 +7,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class LoginTest {
-    WebDriver wd;
+import java.util.concurrent.TimeUnit;
 
-    @BeforeMethod
-    public void init()
-    {
-        wd = new ChromeDriver();
-        wd.navigate().to("https://contacts-app.tobbymarshall815.vercel.app/home");
+public class LoginTest extends TestBase{
 
-
-
-    }
 
     @Test
     public void loginPositiveTest()
@@ -44,11 +36,22 @@ public class LoginTest {
 
 
     }
-
-    @AfterMethod
-    public void tearDown()
+    @Test
+    public void loginTest2()
     {
-        // wd.quit();
+        String email = "noa@gmail.com";
+        String password = "Nnoa12345$";
+
+        openLoginRegistrationForm();
+        fillLoginRegistrationForm(email,password);
+        submitLogin();
+        pause(5000);
+        Assert.assertTrue(isElementPresent(By.xpath("//button[text()='Sign Out']")));
+
+
     }
+
+
+
 
 }
